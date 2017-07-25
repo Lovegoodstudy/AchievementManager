@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./css/report.css" />
     <script src="./jquery-3.2.1.js"></script>
     <script src="./bootstrap-3.3.7-dist/js/bootstrap.js"></script>
-    <script src="./js/StudentInfo.js"></script>
+    <script src="js/addStudentInfo.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
             $("form").submit(function(e){
@@ -30,11 +30,17 @@
                         serializeObj[this.name] = this.value;
                     }
                 });
-                let s = JSON.stringify(serializeObj); //转化为JSON字符串
-                localStorage.setItem("studentInfo", s);
-
-                obj=JSON.parse(localStorage.getItem("temp2"));
-                alert(obj.name);
+                var studentInfoList = JSON.parse(localStorage.getItem('studentInfoList'));
+                if ((studentInfoList == undefined)||(!Object.prototype.toString.call(studentInfoList)=='[object Array]'))
+                    studentInfoList = [];
+                for (let studentInfo of studentInfoList) {
+                    if (serializeObj.studentID == studentInfo.studentID) {
+                        alert('学号已经存在！请重新输入！');
+                        return false;
+                    }
+                }
+                studentInfoList.push(serializeObj);
+                localStorage.setItem('studentInfoList', JSON.stringify(studentInfoList));
             });
             $("#name").keyup(function(){
                 if (testblank('#name')) {
@@ -107,37 +113,37 @@
         <div class="row">
             <form action="">
                 <div class="row">
-                    <div class="col-md-2"><p>姓名：</p></div>
-                    <div class="col-md-8"><input type="text" name="name" id="name"></div>
+                    <div class="col-md-1"><p>姓名：</p></div>
+                    <div class="col-md-3"><input type="text" name="name" id="name"></div>
                     <div class="col-md-2"><p id="nametest"> </p></div>
                 </div>
                 <div class="row">
-                    <div class="col-md-2"><p>学号：</p></div>
-                    <div class="col-md-8"><input type="text" name="studentID" id="studentID"></div>
+                    <div class="col-md-1"><p>学号：</p></div>
+                    <div class="col-md-3"><input type="text" name="studentID" id="studentID"></div>
                     <div class="col-md-2"><p id="studIDtest"> </p></div>
                 </div>
                 <div class="row">
-                    <div class="col-md-2"><p>语文成绩：</p></div>
-                    <div class="col-md-8"><input type="text" name="chinese" id="chinese"></div>
+                    <div class="col-md-1"><p>语文成绩：</p></div>
+                    <div class="col-md-3"><input type="text" name="chinese" id="chinese"></div>
                     <div class="col-md-2"><p id="chinesetest"> </p></div>
                 </div>
                 <div class="row">
-                    <div class="col-md-2"><p>数学成绩：</p></div>
-                    <div class="col-md-8"><input type="text" name="math" id="math"></div>
+                    <div class="col-md-1"><p>数学成绩：</p></div>
+                    <div class="col-md-3"><input type="text" name="math" id="math"></div>
                     <div class="col-md-2"><p id="mathtest"> </p></div>
                 </div>
                 <div class="row">
-                    <div class="col-md-2"><p>英语成绩：</p></div>
-                    <div class="col-md-8"><input type="text" name="english" id="english"></div>
+                    <div class="col-md-1"><p>英语成绩：</p></div>
+                    <div class="col-md-3"><input type="text" name="english" id="english"></div>
                     <div class="col-md-2"><p id="englishtest"> </p></div>
                 </div>
                 <div class="row">
-                    <div class="col-md-2"><p>编程成绩：</p></div>
-                    <div class="col-md-8"><input type="text" name="programming" id="programming"></div>
+                    <div class="col-md-1"><p>编程成绩：</p></div>
+                    <div class="col-md-3"><input type="text" name="programming" id="programming"></div>
                     <div class="col-md-2"><p id="programmingtest"> </p></div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12"><input type="submit" value="添加学生信息"></div>
+                    <div class="col-md-6"><input type="submit" value="添加学生信息"></div>
                 </div>
             </form>
         </div>

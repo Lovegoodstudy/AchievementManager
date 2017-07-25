@@ -21,10 +21,20 @@ function testnumber(id) {
     }
 }
 
+function addStudentInfo(studentInfo, studentInfoList) {
+    for (let studInfo of studentInfoList) {
+        if (studentInfo.studentID == studInfo.studentID)
+            return false;
+    }
+    studentInfoList.push(studentInfo);
+    localStorage.setItem('studentInfoList', JSON.stringify(studentInfoList));
+    return true;
+}
+
 function addTotal(studentInfo) {
     studentInfo.total = studentInfo.math + studentInfo.chinese + studentInfo.english + studentInfo.programming;
 }
 
-function getAverage() {
-    this.average = this.total / 4;
+function getAverage(studentInfo) {
+    studentInfo.average = studentInfo.total / 4;
 }

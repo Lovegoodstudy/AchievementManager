@@ -7,54 +7,55 @@
     <link rel="stylesheet" href="./css/report.css" />
     <script src="./jquery-3.2.1.js"></script>
     <script src="./bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="./js/report.js"></script>
     <script>
-        $(function () {
-            var report = {
-                form : [
-                    {
-                        name : 'Bob',
-                        studentID : '201511111',
-                        chinese : 80,
-                        math : 100,
-                        english : 90,
-                        programming : 90,
-                        total : 360,
-                        average : 90
-                    }
-                ],
-                average : 360,
-                median : 360
-            }
-            ${"name"}.html(report.form.name);
-        });
+        var studentInfoList = JSON.parse(localStorage.getItem('studentInfoList'));
+        var idArr = JSON.parse(localStorage.getItem('IDs'));
+        var list = [];
+        for (let studentInfo of studentInfoList) {
+            if (idArr.indexOf(studentInfo.studentID) > -1)
+                list.push(studentInfo);
+        }
+        let report = new Report(list);
+        for (let studentInfo of report.form) {
+            $('#infotable').append(`
+<tr>
+<th></th>
+<th><p>${studentInfo.name}</p></th>
+<th><p>${studentInfo.studentID}</p></th>
+<th><p>${studentInfo.chinese}</p></th>
+<th><p>${studentInfo.math}</p></th>
+<th><p>${studentInfo.english}</p></th>
+<th><p>${studentInfo.programming}</p></th>
+<th><p>${studentInfo.total}</p></th>
+<th><p>${studentInfo.average}</p></th>
+</tr>`);
+        }
     </script>
 </head>
 <body>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1>成绩管理系统</h1>
+                <h1>成绩单</h1>
             </div>
         </div>
         <div class="row">
             <table class="table table-hover">
-                <caption>基本的表格布局</caption>
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>姓名</th>
-                        <th>学号</th>
-                        <th>语文成绩</th>
-                        <th>数学成绩</th>
-                        <th>英语成绩</th>
-                        <th>编程成绩</th>
+                        <th><p>姓名</p></th>
+                        <th><p>学号</p></th>
+                        <th><p>语文成绩</p></th>
+                        <th><p>数学成绩</p></th>
+                        <th><p>英语成绩</p></th>
+                        <th><p>编程成绩</p></th>
+                        <th><p>总分</p></th>
+                        <th><p>平均分</p></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th></th>
-                        <th>Bob</th>
-                    </tr>
                 </tbody>
             </table>
         </div>

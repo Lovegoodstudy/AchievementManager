@@ -31,10 +31,11 @@ function addStudentInfo(studentInfo, studentInfoList) {
     return true;
 }
 
-function addTotal(studentInfo) {
+function infoIn(studentInfo) {
+    studentInfo.chinese = Number(studentInfo.chinese);
+    studentInfo.math = Number(studentInfo.math);
+    studentInfo.english = Number(studentInfo.english);
+    studentInfo.programming = Number(studentInfo.programming);
     studentInfo.total = studentInfo.math + studentInfo.chinese + studentInfo.english + studentInfo.programming;
-}
-
-function getAverage(studentInfo) {
     studentInfo.average = studentInfo.total / 4;
 }

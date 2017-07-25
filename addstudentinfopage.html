@@ -30,9 +30,12 @@
                         serializeObj[this.name] = this.value;
                     }
                 });
+                infoIn(serializeObj);
                 var studentInfoList = JSON.parse(localStorage.getItem('studentInfoList'));
-                if ((studentInfoList == undefined)||(!Object.prototype.toString.call(studentInfoList)=='[object Array]'))
+                if ((studentInfoList == undefined)||(!Object.prototype.toString.call(studentInfoList)=='[object Array]')) {
                     studentInfoList = [];
+                    localStorage.setItem('studentInfoList', JSON.stringify(studentInfoList));
+                }
                 for (let studentInfo of studentInfoList) {
                     if (serializeObj.studentID == studentInfo.studentID) {
                         alert('学号已经存在！请重新输入！');

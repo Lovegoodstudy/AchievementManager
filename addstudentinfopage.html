@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加学生成绩</title>
+    <link rel="stylesheet" href="./bootstrap-3.3.7-dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="./css/report.css" />
+    <script src="./jquery-3.2.1.js"></script>
+    <script src="./bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="./js/StudentInfo.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("form").submit(function(e){
+                if (($('#nametest').text()!='√')||($('#studIDtest').text()!='√')||($('#chinesetest').text()!='√')||($('#mathtest').text()!='√')||($('#englishtest').text()!='√')||($('#programmingtest').text()!='√')) {
+                    alert('学生信息填写有误！');
+                    return false;
+                }
+                var serializeObj = {};
+                var array = $('form').serializeArray();
+                $(array).each(function() {
+                    if(serializeObj[this.name]) {
+                        if($.isArray(serializeObj[this.name])) {
+                            serializeObj[this.name].push(this.value);
+                        }
+                        else {
+                            serializeObj[this.name] = [serializeObj[this.name],this.value];
+                        }
+                    }
+                    else {
+                        serializeObj[this.name] = this.value;
+                    }
+                });
+                let s = JSON.stringify(serializeObj); //转化为JSON字符串
+                localStorage.setItem("studentInfo", s);
+
+                obj=JSON.parse(localStorage.getItem("temp2"));
+                alert(obj.name);
+            });
+            $("#name").keyup(function(){
+                if (testblank('#name')) {
+                    $('#nametest').text('√');
+                }
+                else {
+                    $('#nametest').text('请输入学生姓名！');
+                }
+            });
+            $("#studentID").keyup(function(){
+                if (testblank('#studentID')) {
+                    $('#studIDtest').text('√');
+                }
+                else {
+                    $('#studIDtest').text('请输入学生学号！');
+                }
+            });
+            $("#chinese").keyup(function(){
+                if (!testblank('#chinese')) {
+                    $('#chinesetest').text('请输入学生语文成绩！');
+                }
+                else if (!testnumber('#chinese')){
+                    $('#chinesetest').text('成绩必须为数字！');
+                }
+                else {
+                    $('#chinesetest').text('√');
+                }
+            });
+            $("#math").keyup(function(){
+                if (!testblank('#math')) {
+                    $('#mathtest').text('请输入学生数学成绩！');
+                }
+                else if (!testnumber('#math')){
+                    $('#mathtest').text('成绩必须为数字！');
+                }
+                else {
+                    $('#mathtest').text('√');
+                }
+            });
+            $("#english").keyup(function(){
+                if (!testblank('#english')) {
+                    $('#englishtest').text('请输入学生英语成绩！');
+                }
+                else if (!testnumber('#english')){
+                    $('#englishtest').text('成绩必须为数字！');
+                }
+                else {
+                    $('#englishtest').text('√');
+                }
+            });
+            $("#programming").keyup(function(){
+                if (!testblank('#programming')) {
+                    $('#programmingtest').text('请输入学生编程成绩！');
+                }
+                else if (!testnumber('#programming')){
+                    $('#programmingtest').text('成绩必须为数字！');
+                }
+                else {
+                    $('#programmingtest').text('√');
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>添加一名学生信息</h1>
+        </div>
+        <div class="row">
+            <form action="">
+                <div class="row">
+                    <div class="col-md-2"><p>姓名：</p></div>
+                    <div class="col-md-8"><input type="text" name="name" id="name"></div>
+                    <div class="col-md-2"><p id="nametest"> </p></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2"><p>学号：</p></div>
+                    <div class="col-md-8"><input type="text" name="studentID" id="studentID"></div>
+                    <div class="col-md-2"><p id="studIDtest"> </p></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2"><p>语文成绩：</p></div>
+                    <div class="col-md-8"><input type="text" name="chinese" id="chinese"></div>
+                    <div class="col-md-2"><p id="chinesetest"> </p></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2"><p>数学成绩：</p></div>
+                    <div class="col-md-8"><input type="text" name="math" id="math"></div>
+                    <div class="col-md-2"><p id="mathtest"> </p></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2"><p>英语成绩：</p></div>
+                    <div class="col-md-8"><input type="text" name="english" id="english"></div>
+                    <div class="col-md-2"><p id="englishtest"> </p></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2"><p>编程成绩：</p></div>
+                    <div class="col-md-8"><input type="text" name="programming" id="programming"></div>
+                    <div class="col-md-2"><p id="programmingtest"> </p></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12"><input type="submit" value="添加学生信息"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Report</title>
+    <link rel="stylesheet" href="./bootstrap-3.3.7-dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="./css/report.css" />
+    <script src="./jquery-3.2.1.js"></script>
+    <script src="./bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script>
+        $(function () {
+            var report = {
+                form : [
+                    {
+                        name : 'Bob',
+                        studentID : '201511111',
+                        chinese : 80,
+                        math : 100,
+                        english : 90,
+                        programming : 90,
+                        total : 360,
+                        average : 90
+                    }
+                ],
+                average : 360,
+                median : 360
+            }
+            ${"name"}.html(report.form.name);
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>成绩管理系统</h1>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table table-hover">
+                <caption>基本的表格布局</caption>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>姓名</th>
+                        <th>学号</th>
+                        <th>语文成绩</th>
+                        <th>数学成绩</th>
+                        <th>英语成绩</th>
+                        <th>编程成绩</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th></th>
+                        <th>Bob</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

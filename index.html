@@ -18,10 +18,10 @@
         localStorage.setItem('studentInfoList', JSON.stringify(studentInfoList));*/
         $(document).ready(function(){
             $('#addInfoButton').click(function () {
-                $('#addpage').load('addstudentinfopage.html');
+                $('#addpage').load('./addstudentinfopage.html');
             });
             $('#printReportButton').click(function () {
-                $('#addpage').load('getIDs.html');
+                $('#addpage').load('./getIDs.html');
             })
             var studentInfoList = JSON.parse(localStorage.getItem('studentInfoList'));
             if ((studentInfoList == undefined)||(!Object.prototype.toString.call(studentInfoList)=='[object Array]'))

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加学生成绩</title>
+    <link rel="stylesheet" href="./bootstrap-3.3.7-dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="./css/report.css" />
+    <script src="./jquery-3.2.1.js"></script>
+    <script src="./bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="js/addStudentInfo.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#submitInfoForm').load('./submitInfo.html',function () {
+                $("form").submit(function(){
+                    var serializeObj = {};
+                    var array = $('form').serializeArray();
+                    $(array).each(function() {
+                        if(serializeObj[this.name]) {
+                            if($.isArray(serializeObj[this.name])) {
+                                serializeObj[this.name].push(this.value);
+                            }
+                            else {
+                                serializeObj[this.name] = [serializeObj[this.name],this.value];
+                            }
+                        }
+                        else {
+                            serializeObj[this.name] = this.value;
+                        }
+                    });
+                    infoIn(serializeObj);
+                    var studentInfoList = JSON.parse(localStorage.getItem('studentInfoList'));
+                    if ((studentInfoList == undefined)||(!Object.prototype.toString.call(studentInfoList)=='[object Array]')) {
+                        studentInfoList = [];
+                        localStorage.setItem('studentInfoList', JSON.stringify(studentInfoList));
+                    }
+                    for (let studentInfo of studentInfoList) {
+                        if (serializeObj.studentID == studentInfo.studentID) {
+                            alert('学号已经存在！请重新输入！');
+                            return false;
+                        }
+                    }
+                    studentInfoList.push(serializeObj);
+                    localStorage.setItem('studentInfoList', JSON.stringify(studentInfoList));
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>添加一名学生信息</h1>
+        </div>
+        <div class="row" id="submitInfoForm">
+        </div>
+    </div>
+</body>
+</html>

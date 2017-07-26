@@ -9,16 +9,17 @@
     <script src="./bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <script src="./js/report.js"></script>
     <script>
-        var studentInfoList = JSON.parse(localStorage.getItem('studentInfoList'));
-        var idArr = JSON.parse(localStorage.getItem('IDs'));
-        var list = [];
-        for (let studentInfo of studentInfoList) {
-            if (idArr.indexOf(studentInfo.studentID) > -1)
-                list.push(studentInfo);
-        }
-        let report = new Report(list);
-        for (let studentInfo of report.form) {
-            $('#infotable').append(`
+        $(document).ready(function () {
+            var studentInfoList = JSON.parse(localStorage.getItem('studentInfoList'));
+            var idArr = JSON.parse(localStorage.getItem('IDs'));
+            var list = [];
+            for (let studentInfo of studentInfoList) {
+                if (idArr.indexOf(studentInfo.studentID) > -1)
+                    list.push(studentInfo);
+            }
+            let report = new Report(list);
+            for (let studentInfo of report.form) {
+                $('#infotable').append(`
 <tr>
 <th></th>
 <th><p>${studentInfo.name}</p></th>
@@ -30,7 +31,14 @@
 <th><p>${studentInfo.total}</p></th>
 <th><p>${studentInfo.average}</p></th>
 </tr>`);
-        }
+            }
+            $('#table').append(`
+<div class="row">
+<div class="col-md-2"><p><b>总分平均分：${report.average}</b></p></div>
+<div class="col-md-2"><p><b>总分中位数：${report.median}</b></p></div>
+</div>
+            `)
+        });
     </script>
 </head>
 <body>
@@ -40,7 +48,7 @@
                 <h1>成绩单</h1>
             </div>
         </div>
-        <div class="row">
+        <div class="row" id="table">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -55,7 +63,8 @@
                         <th><p>平均分</p></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody  id="infotable">
+
                 </tbody>
             </table>
         </div>

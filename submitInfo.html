@@ -2,9 +2,72 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>submitInfo</title>
+    <link rel="stylesheet" href="./bootstrap-3.3.7-dist/css/bootstrap.css" />
+    <script src="./jquery-3.2.1.js"></script>
+    <script src="./bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="./js/addStudentInfo.js"></script>
+    <style>
+        input {
+            width : 200px;
+        }
+        input[type="number"]{
+            -moz-appearance: textfield;
+        }
+    </style>
 </head>
 <body>
-$END$
+    <div class="container">
+        <form id="infoForm">
+            <div class="row">
+                <div class="col-md-2">
+                    <p>姓名：</p>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="name" id="name" required="required">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <p>学号：</p>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="studentID" id="studentID" required="required">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <p>语文成绩：</p>
+                </div>
+                <div class="col-md-3">
+                    <input type="number" name="chinese" id="chinese" required="required" min="0" max="100">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <p>数学成绩：</p>
+                </div>
+                <div class="col-md-3">
+                    <input type="number" name="math" id="math" required="required" min="0" max="100">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <p>英语成绩：</p>
+                </div>
+                <div class="col-md-3">
+                    <input type="number" name="english" id="english" required="required" min="0" max="100">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <p>编程成绩：</p>
+                </div>
+                <div class="col-md-3">
+                    <input type="number" name="programming" id="programming" required="required" min="0" max="100">
+                </div>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

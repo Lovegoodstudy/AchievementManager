@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加学生成绩</title>
+    <link rel="stylesheet" href="./bootstrap-3.3.7-dist/css/bootstrap.css" />
+    <script src="./jquery-3.2.1.js"></script>
+    <script src="./bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <script src="./js/updateInfo.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#submitInfoForm').load('./submitInfo.html',function () {
+                var studentInfo = JSON.parse(localStorage.getItem('studentInfoTemp'));
+                $('#name').val(studentInfo.name);
+                $('#studentID').val(studentInfo.studentID);
+                $('#chinese').val(studentInfo.chinese);
+                $('#math').val(studentInfo.math);
+                $('#english').val(studentInfo.english);
+                $('#programming').val(studentInfo.programming);
+                $('#infoForm').append(`
+<div class="row">
+    <div class="col-md-2">
+        <input type="submit" value="确认修改" id="addInfo">
+    </div>
+    <div class="col-md-2">
+        <input type="button" value="取消" id="cancel">
+    </div>
+</div>
+                `);
+                $('#infoForm').submit(function () {
+                    return getAndAddInfo();
+                });
+                $('#cancel').click(function () {
+                    cancelPop();
+                    window.location.reload();
+                });
+                $('#closeButton').click(function () {
+                    cancelPop();
+                    window.location.reload();
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>修改一名学生信息</h1>
+        </div>
+        <div class="row" id="submitInfoForm">
+        </div>
+    </div>
+</body>
+</html>
